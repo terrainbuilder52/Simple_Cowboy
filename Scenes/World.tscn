@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/background.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/World.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Player.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Enemy.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/UI.gd" type="Script" id=8]
+[ext_resource path="res://Audio/Anamalie .ogg" type="AudioStream" id=9]
+
+[node name="World" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 640, 360 )
+texture = ExtResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 464, 464 )
+script = ExtResource( 6 )
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 816, 464 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+script = ExtResource( 7 )
+
+[node name="Control" parent="." instance=ExtResource( 4 )]
+script = ExtResource( 8 )
+
+[node name="ReadyButton" parent="Control" index="0"]
+visible = false
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.097
+autoplay = true
+[connection signal="game_end" from="Player" to="." method="_on_Player_game_end"]
+[connection signal="game_end" from="Player" to="Control" method="_on_Player_game_end"]
+[connection signal="game_end" from="Enemy" to="." method="_on_Enemy_game_end"]
+[connection signal="game_end" from="Enemy" to="Control" method="_on_Enemy_game_end"]
+[connection signal="shoot" from="Enemy" to="Player" method="_on_Enemy_shoot"]
+[connection signal="shoot" from="Enemy" to="Control" method="_on_Enemy_shoot"]
+[connection signal="timeout" from="Enemy/SelfTimer" to="Enemy" method="_on_SelfTimer_timeout"]
+[connection signal="pressed" from="Control/ReadyButton" to="." method="_on_ReadyButton_pressed"]
+[connection signal="pressed" from="Control/Node2D/FireButton" to="Player" method="_on_FireButton_pressed"]
+[connection signal="timeout" from="Timer" to="Enemy" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="Control" method="_on_Timer_timeout"]
+
+[editable path="Player"]
+
+[editable path="Enemy"]
+
+[editable path="Control"]
+
+[editable path="Control/Node2D"]

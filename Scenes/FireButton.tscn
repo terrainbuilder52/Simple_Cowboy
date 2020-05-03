@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/FireButton.gd" type="Script" id=1]
+[ext_resource path="res://Assets/firebutton-normal.png" type="Texture" id=2]
+[ext_resource path="res://Assets/firebutton-hover.png" type="Texture" id=3]
+[ext_resource path="res://Assets/firebutton-pressed.png" type="Texture" id=4]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 40, 32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="FireButton" type="TextureButton" parent="."]
+visible = false
+margin_left = -128.0
+margin_top = -32.0
+margin_right = 128.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+script = ExtResource( 1 )
+[connection signal="pressed" from="FireButton" to="FireButton" method="_on_FireButton_pressed"]
