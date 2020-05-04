@@ -30,27 +30,23 @@ script = ExtResource( 7 )
 [node name="Control" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 8 )
 
-[node name="ReadyButton" parent="Control" index="0"]
-visible = false
-
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -10.097
 autoplay = true
-[connection signal="game_end" from="Player" to="." method="_on_Player_game_end"]
 [connection signal="game_end" from="Player" to="Control" method="_on_Player_game_end"]
-[connection signal="game_end" from="Enemy" to="." method="_on_Enemy_game_end"]
+[connection signal="game_end" from="Player" to="." method="_on_Player_game_end"]
 [connection signal="game_end" from="Enemy" to="Control" method="_on_Enemy_game_end"]
-[connection signal="shoot" from="Enemy" to="Player" method="_on_Enemy_shoot"]
+[connection signal="game_end" from="Enemy" to="." method="_on_Enemy_game_end"]
 [connection signal="shoot" from="Enemy" to="Control" method="_on_Enemy_shoot"]
+[connection signal="shoot" from="Enemy" to="Player" method="_on_Enemy_shoot"]
 [connection signal="timeout" from="Enemy/SelfTimer" to="Enemy" method="_on_SelfTimer_timeout"]
-[connection signal="pressed" from="Control/ReadyButton" to="." method="_on_ReadyButton_pressed"]
 [connection signal="pressed" from="Control/Node2D/FireButton" to="Player" method="_on_FireButton_pressed"]
-[connection signal="timeout" from="Timer" to="Enemy" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="Control" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="Enemy" method="_on_Timer_timeout"]
 
 [editable path="Player"]
 
