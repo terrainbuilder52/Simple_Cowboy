@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ForTheBothOfUS"
+config/name="Simple Cowboy"
 run/main_scene="res://Scenes/Start.tscn"
 config/icon="res://icon.png"
 
